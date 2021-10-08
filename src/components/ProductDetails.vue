@@ -21,44 +21,58 @@
           </p>
         </div>
         <hr class="my-4" />
-        <div class="flex flex-wrap gap-2 my-4">
-          <h4 class="text-base my-auto w-20">Storage:</h4>
-          <div class="flex flex-wrap gap-x-2">
-            <div class="btn">
-              128GB
+        <form action="">
+          <div class="flex flex-wrap gap-2 my-4">
+            <h4 class="text-base my-auto w-20">Storage:</h4>
+            <div>
+              <input class="hidden" id="s1" type="radio" name="storage" />
+              <label class="flex flex-col  btn" for="s1">
+                512GB
+              </label>
             </div>
-            <div class="btn">256GB</div>
-            <div class="btn">512GB</div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-2 my-4">
-          <h4 class="text-base my-auto w-20">Color:</h4>
-          <div class="flex flex-wrap gap-x-2">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-2 my-4">
-          <h4 class="text-base my-auto w-20">Sim:</h4>
-          <div class="flex flex-wrap gap-x-2">
-            <div class="btn">
-              e-Sim
+            <div>
+              <input class="hidden" id="s" type="radio" name="storage" />
+              <label class="flex flex-col  btn" for="s">
+                128GB
+              </label>
             </div>
-            <div class="btn">Dual</div>
           </div>
-        </div>
-        <div class="flex flex-wrap gap-2 my-4">
-          <h4 class="text-base my-auto  w-20">Region:</h4>
-          <div class="flex flex-wrap gap-x-2">
-            <div class="btn">
-              Regular
+        </form>
+        <form action="">
+          <div class="flex flex-wrap gap-2 my-4">
+            <h4 class="text-base my-auto w-20">Color:</h4>
+            <div>
+              <input class="hidden" id="c1" type="radio" name="color" />
+              <label
+                class="flex flex-col  h-7 w-7 rounded-full border-2 border-gray-400 cursor-pointer "
+                for="c1"
+              >
+              </label>
             </div>
-            <div class="btn">USA</div>
           </div>
-        </div>
+        </form>
+        <form action="">
+          <div class="flex flex-wrap gap-2 my-4">
+            <h4 class="text-base my-auto w-20">Sim:</h4>
+            <div>
+              <input class="hidden" id="si1" type="radio" name="sim" />
+              <label class="flex flex-col  btn" for="si1">
+                Dual
+              </label>
+            </div>
+          </div>
+        </form>
+        <form action="">
+          <div class="flex flex-wrap gap-2 my-4">
+            <h4 class="text-base my-auto w-20">Region:</h4>
+            <div>
+              <input class="hidden" id="r1" type="radio" name="region" />
+              <label class="flex flex-col  btn" for="r1">
+                USA
+              </label>
+            </div>
+          </div>
+        </form>
         <button
           class="p-2 bg-gray-900 text-white hover:text-gray-900 hover:bg-gray-200 mt-5 rounded-md px-3"
         >
@@ -69,8 +83,16 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Product Details",
+  computed: mapGetters(["allCombination"]),
+  created() {
+    this.getCombinationData();
+  },
+  methods: {
+    ...mapActions(["getCombinationData"]),
+  },
   setup() {
     return {};
   },
@@ -83,5 +105,11 @@ export default {
 }
 .circle {
   @apply h-9 w-9 rounded-full ring-2 ring-gray-500 cursor-pointer;
+}
+
+input:checked + label {
+  border-color: chocolate;
+  background-color: gray;
+  color: black;
 }
 </style>

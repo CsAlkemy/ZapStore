@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-32  gap-4 rounded-lg"
+      class="grid grid-cols-1 md:grid-cols-3 mt-32  gap-y-4 sm:gap-4 rounded-lg"
     >
-      <div class="col-span-2 bg-white">
+      <div class="col-span-2  bg-white">
         <h2 class="uppercase text-lg bg-gray-300 p-2 pl-6 ">Product</h2>
         <div class="flex flex-wrap gap-4 py-10 p-4 bg-white">
           <div class="max-w-md">
@@ -44,9 +44,9 @@
           </div>
         </div>
       </div>
-      <div class="col-span-1 bg-white">
+      <div class="col-span-1  bg-white">
         <h2 class="uppercase text-lg bg-gray-300 p-2 text-center ">
-          Your Cart (1)
+          Your Cart ({{ $store.state.counter }})
         </h2>
         <div class="bg-white">
           <p class=" text-xs text-gray-400 p-2 text-center ">
@@ -89,9 +89,12 @@ export default {
   components: {
     TrashIcon,
   },
-  setup() {
-    return {};
+  data() {
+    return {
+      count: 0,
+    };
   },
+  methods: {},
 };
 </script>
 
