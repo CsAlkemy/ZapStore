@@ -24,74 +24,74 @@
         <form action="">
           <div class="flex flex-wrap gap-2 my-4">
             <h4 class="text-base my-auto w-20">Storage:</h4>
-            <div>
-              <input class="hidden" id="s1" type="radio" name="storage" />
-              <label class="flex flex-col  btn" for="s1">
-                512GB
-              </label>
-            </div>
-            <div>
-              <input class="hidden" id="s" type="radio" name="storage" />
-              <label class="flex flex-col  btn" for="s">
-                128GB
+            <div v-for="item in StorageData.Storage" :key="item.id">
+              <input class="hidden" :id="item.id" type="radio" name="storage" />
+              <label class="flex flex-col  btn" :for="item.id">
+                {{ item.value }}
               </label>
             </div>
           </div>
-        </form>
-        <form action="">
+
           <div class="flex flex-wrap gap-2 my-4">
             <h4 class="text-base my-auto w-20">Color:</h4>
-            <div>
-              <input class="hidden" id="c1" type="radio" name="color" />
+            <div v-for="item in ColorData.Color" :key="item.id">
+              <input class="hidden" :id="item.id" type="radio" name="color" />
               <label
                 class="flex flex-col  h-7 w-7 rounded-full border-2 border-gray-400 cursor-pointer "
-                for="c1"
+                :for="item.id"
               >
               </label>
             </div>
           </div>
-        </form>
-        <form action="">
+
           <div class="flex flex-wrap gap-2 my-4">
             <h4 class="text-base my-auto w-20">Sim:</h4>
-            <div>
-              <input class="hidden" id="si1" type="radio" name="sim" />
-              <label class="flex flex-col  btn" for="si1">
-                Dual
+            <div v-for="item in SimData.Sim" :key="item.id">
+              <input class="hidden" :id="item.id" type="radio" name="sim" />
+              <label class="flex flex-col  btn" :for="item.id">
+                {{ item.value }}
               </label>
             </div>
           </div>
-        </form>
-        <form action="">
+
           <div class="flex flex-wrap gap-2 my-4">
             <h4 class="text-base my-auto w-20">Region:</h4>
-            <div>
-              <input class="hidden" id="r1" type="radio" name="region" />
-              <label class="flex flex-col  btn" for="r1">
-                USA
+            <div v-for="item in RegionData.Region" :key="item.id">
+              <input class="hidden" :id="item.id" type="radio" name="region" />
+              <label class="flex flex-col  btn" :for="item.id">
+                {{ item.value }}
               </label>
             </div>
           </div>
+          <input
+            type="button"
+            value="Add to Cart"
+            class="p-2 bg-gray-900 text-white hover:text-gray-900 hover:bg-gray-200 mt-5 rounded-md px-3"
+          />
         </form>
-        <button
-          class="p-2 bg-gray-900 text-white hover:text-gray-900 hover:bg-gray-200 mt-5 rounded-md px-3"
-        >
-          Add to Cart
-        </button>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "Product Details",
-  computed: mapGetters(["allCombination"]),
+  computed: {
+    ...mapGetters([
+      "StorageData",
+      "ColorData",
+      "SimData",
+      "RegionData",
+      "allVariationData",
+    ]),
+  },
   created() {
     this.getCombinationData();
   },
   methods: {
-    ...mapActions(["getCombinationData"]),
+    ...mapActions(["getCombinationData", "getVariation"]),
   },
   setup() {
     return {};
@@ -103,13 +103,9 @@ export default {
 .btn {
   @apply text-sm px-2 cursor-pointer rounded-3xl ring-1 ring-gray-400 focus:ring-red-400 focus:ring-2 hover:bg-gray-300;
 }
-.circle {
-  @apply h-9 w-9 rounded-full ring-2 ring-gray-500 cursor-pointer;
-}
-
 input:checked + label {
-  border-color: chocolate;
-  background-color: gray;
-  color: black;
+  border-color: black;
+  background-color: black;
+  color: white;
 }
 </style>
